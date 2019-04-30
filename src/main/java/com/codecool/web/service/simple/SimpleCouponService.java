@@ -20,6 +20,10 @@ public final class SimpleCouponService implements CouponService {
         this.shopDao = shopDao;
     }
 
+    public List<Coupon> getCouponsByUserAndShopID(int user_id, int shop_id) throws SQLException {
+        return couponDao.findAllByUserAndShopId(user_id, shop_id);
+    }
+
     public List<Coupon> getCouponsByUserID(int user_id) throws SQLException {
         return couponDao.findAllByUserId(user_id);
     }
