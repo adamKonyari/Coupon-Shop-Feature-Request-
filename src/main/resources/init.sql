@@ -1,10 +1,11 @@
 /*
     Database initialization script that runs on every web-application redeployment.
 */
-DROP TABLE IF EXISTS coupons_shops;
-DROP TABLE IF EXISTS coupons;
-DROP TABLE IF EXISTS shops;
-DROP TABLE IF EXISTS users;
+DROP TABLE IF EXISTS coupons_shops CASCADE;
+DROP TABLE IF EXISTS coupons CASCADE;
+DROP TABLE IF EXISTS shops CASCADE;
+DROP TABLE IF EXISTS users CASCADE;
+DROP TABLE IF EXISTS users_coupons CASCADE;
 
 CREATE TABLE users (
     id SERIAL PRIMARY KEY,
@@ -34,6 +35,12 @@ CREATE TABLE coupons_shops (
     PRIMARY KEY (coupon_id, shop_id),
     FOREIGN KEY (coupon_id) REFERENCES coupons(id),
     FOREIGN KEY (shop_id) REFERENCES shops(id)
+);
+
+CREATE TABLE users_coupons (
+  user_id int REFERENCES users(id),
+  coupon_id int REFERENCES coupons(id),
+  PRIMARY KEY (user_id, coupon_id)
 );
 
 INSERT INTO users (email, password) VALUES
@@ -69,3 +76,12 @@ INSERT INTO coupons_shops (coupon_id, shop_id) VALUES
     (4, 3), -- 4
     (5, 2), -- 5
     (5, 5);
+
+INSERT INTO users_coupons (user_id, coupon_id) values
+                                                      (1,1),
+                                                      (1,2),
+                                                      (1,3),
+                                                      (2,4),
+                                                      (3,5);
+
+

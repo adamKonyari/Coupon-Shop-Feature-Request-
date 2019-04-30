@@ -7,6 +7,8 @@ import java.util.List;
 
 public interface CouponDao {
 
+    List<Coupon> findAllByUserId(int user_id) throws SQLException;
+
     List<Coupon> findAll() throws SQLException;
 
     Coupon findById(int id) throws SQLException;

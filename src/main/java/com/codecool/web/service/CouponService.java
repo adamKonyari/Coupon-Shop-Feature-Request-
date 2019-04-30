@@ -9,6 +9,8 @@ import java.util.List;
 
 public interface CouponService {
 
+    List<Coupon> getCouponsByUserID(int user_id) throws SQLException;
+
     List<Coupon> getCoupons() throws SQLException;
 
     Coupon getCoupon(String id) throws SQLException, ServiceException;
